@@ -142,6 +142,11 @@ resource "aws_route" "route_to_internet_nat_gateway" {
   route_table_id         = aws_route_table.private_route_tables[count.index].id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_nat_gateway.internet_nat_gateways[count.index].id
+
+  timeouts {
+    create = "5m"
+    update = "5m"
+  }
 }
 
 resource "aws_route_table_association" "private_route_table_association" {
